@@ -4,6 +4,7 @@ async function init() {
   //Fetches list of all cities along with their images and description
   let cities = await fetchCities();
   console.log(cities)
+  // console.log(config);
 
 
   //Updates the DOM with the cities
@@ -20,9 +21,10 @@ async function fetchCities() {
   try {
     const response = await fetch(config.backendEndpoint + "/cities");
     const data = await response.json();
+    // console.log(data);
     return data;
   } catch (error) {
-    console.log("error", error)
+    // console.log("error", error)
     return null;
   }
 
@@ -35,12 +37,12 @@ function addCityToDOM(id, city, description, image) {
   // . Populate the City details and insert those details into the DOM
   const row = document.getElementById("data");
   let col = document.createElement("div");
-  col.className = "col-lg-3 col-md-4 col-sm-6 col-12 mb-4"
+  col.className = "col-lg-3 col-sm-6 col-12 mb-4"
   col.innerHTML = `
               <a href = "pages/adventures/?city=${id}" id="${id}">
                   <div class="tile">
                     <img src=${image} alt=${city} class="img-fluid">
-                    <div class="tile-text text-center">
+                      <div class="tile-text text-center">
                       <h5>${city}</h5>
                       <p class="text-white">${description}</p>
                     </div>
