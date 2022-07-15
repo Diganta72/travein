@@ -123,6 +123,9 @@
         //entry point (executed when DOM is loaded)
         (async function () {
 
+            filters["duration"] = ""
+            filters["category"] = []
+
             //Fetches the City from URL query param (here : window.location.search is an in-built browser property that returns the query param from URL, example: http://localhost:8081/?city=bengaluru => window.location.search would return "?city=bengaluru")
             let city = await getCityFromURL(window.location.search);
 
@@ -149,9 +152,8 @@
             const duration = event.target.value;
             filters["duration"] = duration;
             saveFiltersToLocalStorage(filters);
-            const list = filterFunction(adventures, filters);
-            console.log(list);
-            addAdventureToDOM(list);
+            const filteredList = filterFunction(adventures, filters);
+            addAdventureToDOM(filteredList);
 
 
 
@@ -164,8 +166,7 @@
             // 2. Invoke saveFiltersToLocalStorage here
             document.getElementById("duration-select").selectedIndex = 0;
             document.getElementById("data").textContent = "";
-            filters["duration"] = ""
-            generateFilterPillsAndUpdateDOM(filters);
+            filters["duration"] = "";
             let filteredAdventures = filterFunction(adventures, filters);
             addAdventureToDOM(filteredAdventures);
             saveFiltersToLocalStorage(filters);

@@ -163,15 +163,10 @@ function generateFilterPillsAndUpdateDOM(filters) {
     `
     document.getElementById("category-list").appendChild(divElement)
   });
-  
-    
-  if (filters["duration"]) {
-    document.getElementById("duration-select").value = filters["duration"];
 
-    }
-  }
+}
 
-  
+
 export {
   getCityFromURL,
   fetchAdventures,

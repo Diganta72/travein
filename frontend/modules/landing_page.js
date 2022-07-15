@@ -1,9 +1,10 @@
 import config from "../conf/index.js";
 
+
 async function init() {
   //Fetches list of all cities along with their images and description
   let cities = await fetchCities();
-  console.log(cities)
+  // console.log(cities)
   // console.log(config);
 
 
@@ -50,10 +51,12 @@ function addCityToDOM(id, city, description, image) {
                 </a>
 
 `
-  return row.append(col)
+   row.append(col)
 
 
 
 }
+
+
 
 export { init, fetchCities, addCityToDOM };
