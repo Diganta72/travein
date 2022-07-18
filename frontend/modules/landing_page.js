@@ -12,7 +12,7 @@ async function init() {
   cities.forEach((key) => {
     addCityToDOM(key.id, key.city, key.description, key.image);
   });
-  
+
 }
 
 //Implementation of fetch call
@@ -37,26 +37,26 @@ async function fetchCities() {
   function search(data) {
     const searchBar = document.getElementById('searchBar');
     searchBar.addEventListener('keyup', (event) => {
-    const searchString = event.target.value.toLowerCase().trim();
-    const filteredCharacters = data.filter((character) => {
+      const searchString = event.target.value.toLowerCase().trim();
+      const filteredCharacters = data.filter((character) => {
         return (
-            character.city.toLowerCase().includes(searchString)
+          character.city.toLowerCase().includes(searchString)
         );
-        
-    });
 
-    let datas = document.getElementById("data");
-    datas.innerHTML = ""
-    
-    filteredCharacters.forEach((key) => {
-    addCityToDOM(key.id, key.city, key.description, key.image);
-  });
-    
-    
-    
-    return filteredCharacters
- });
-}
+      });
+
+      let datas = document.getElementById("data");
+      datas.innerHTML = ""
+
+      filteredCharacters.forEach((key) => {
+        addCityToDOM(key.id, key.city, key.description, key.image);
+      });
+
+
+
+      return filteredCharacters
+    });
+  }
 
 }
 
@@ -105,7 +105,7 @@ function addCityToDOM(id, city, description, image) {
                 </a>
 
 `
-   row.append(col)
+  row.append(col)
 
 
 
