@@ -23,13 +23,67 @@ async function fetchCities() {
     const response = await fetch(config.backendEndpoint + "/cities");
     const data = await response.json();
     // console.log(data);
-    return data;
+
+    let serachResult = search(data)
+    //console.log("Get Search Result:", serachResult);
+    return serachResult == undefined ? data : serachResult
   } catch (error) {
     // console.log("error", error)
     return null;
   }
 
 
+
+  function search(data) {
+    const searchBar = document.getElementById('searchBar');
+    searchBar.addEventListener('keyup', (event) => {
+    const searchString = event.target.value.toLowerCase().trim();
+    const filteredCharacters = data.filter((character) => {
+        return (
+            character.city.toLowerCase().includes(searchString)
+        );
+        
+    });
+
+    let datas = document.getElementById("data");
+    datas.innerHTML = ""
+    
+    filteredCharacters.forEach((key) => {
+    addCityToDOM(key.id, key.city, key.description, key.image);
+  });
+    
+    
+    
+    return filteredCharacters
+ });
+}
+
+}
+
+const searchBar = document.getElementById('searchBar');
+
+
+function search(data) {
+  searchBar.addEventListener('keyup', (event) => {
+    const searchString = event.target.value.toLowerCase().trim();
+    const filteredCharacters = data.filter((character) => {
+      return (
+        character.city.toLowerCase().includes(searchString)
+      );
+
+    });
+
+    let datas = document.getElementById("data");
+    datas.innerHTML = ""
+
+    filteredCharacters.forEach((key) => {
+      addCityToDOM(key.id, key.city, key.description, key.image);
+    });
+
+
+
+    return filteredCharacters
+  });
 }
 
 //Implementation of DOM manipulation to add cities
@@ -59,4 +113,4 @@ function addCityToDOM(id, city, description, image) {
 
 
 
-export { init, fetchCities, addCityToDOM };
+export { init, fetchCities, addCityToDOM, search };
